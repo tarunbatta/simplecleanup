@@ -17,8 +17,12 @@ chrome.action.onClicked.addListener((tab: chrome.tabs.Tab) => {
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
       func: () => {
-        document.body.style.backgroundColor = "red";
+        document.body.style.backgroundColor = 'red';
       },
     });
   }
 });
+
+chrome.browserAction.setBadgeBackgroundColor({ color: 'red' });
+
+export {};

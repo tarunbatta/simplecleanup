@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, Box, FormControl, FormGroup } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Box,
+  FormControl,
+  FormGroup,
+} from '@mui/material';
 
 import CheckboxList from './CheckboxList';
 import Button from './Button';
@@ -24,9 +30,10 @@ type DataTypeSet = {
 };
 
 const CleanUpApp: React.FC = () => {
-  const startTime: number = (new Date("01 January, 1970")).getTime();
+  const startTime: number = new Date('01 January, 1970').getTime();
   const [badgeCounter, setBadgeCounter] = useState<number>(0);
-  const [originTypes, setOriginTypes] = useState<chrome.browsingData.SettingDetails['options']['originTypes'] | null>(null);
+  const [originTypes, setOriginTypes] =
+    useState<chrome.browsingData.OriginTypes | null>(null);
   const [dataTypeSet, setDataTypeSet] = useState<DataTypeSet | null>(null);
   const [message, setMessage] = useState<string>('');
   const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -64,9 +71,11 @@ const CleanUpApp: React.FC = () => {
 
     setBadgeCounter(0);
 
-    chrome.browsingData.settings(function (response) {
-      setOriginTypes(response.options.originTypes);
-      setDataTypeSet(response.dataRemovalPermitted as DataTypeSet); //response.dataToRemove
+    chrome.browsingData.settings((response) => {
+      if (response.options.originTypes) {
+        setOriginTypes(response.options.originTypes);
+      }
+      setDataTypeSet(response.dataRemovalPermitted as DataTypeSet);
     });
 
     getBrowsingHistory();
@@ -75,109 +84,114 @@ const CleanUpApp: React.FC = () => {
   };
 
   const cleanByType = (typesToClean: DataTypeSet) => {
-    if (typesToClean.hasOwnProperty("cacheStorage")) {
+    if (typesToClean.hasOwnProperty('cacheStorage')) {
       delete typesToClean.cacheStorage;
     }
 
     if (dataTypeSet && originTypes) {
-      chrome.browsingData.remove({
-        "since": startTime,
-        "originTypes": originTypes
-      },
+      chrome.browsingData.remove(
+        {
+          since: startTime,
+          originTypes: originTypes,
+        },
         typesToClean,
-        function () {
+        () => {
           setShowAlert(true);
-          setMessage("Cleanup successful!!");
+          setMessage('Cleanup successful!!');
           init();
-        });
+        },
+      );
     }
   };
 
   const cleanCookie = () => {
-    chrome.cookies.getAll({},
-      function (cookies: chrome.cookies.Cookie[]) {
-        for (const cookie of cookies) {
-          if (cookie != null) {
-            const url = "http" + (cookie.secure ? "s" : "") + "://" + cookie.domain + cookie.path;
-            chrome.cookies.remove({ "url": url, "name": cookie.name });
-          }
+    chrome.cookies.getAll({}, (cookies: chrome.cookies.Cookie[]) => {
+      cookies.forEach((cookie) => {
+        if (cookie) {
+          const url = `http${cookie.secure ? 's' : ''}://${cookie.domain}${cookie.path}`;
+          chrome.cookies.remove({ url, name: cookie.name });
         }
       });
+    });
   };
 
   const updateBadge = () => {
-    chrome.browserAction.setBadgeText({ text: badgeCounter.toString() });
+    if (chrome.action) {
+      chrome.action.setBadgeText({ text: badgeCounter.toString() });
+    }
   };
 
-  const setObjectFlag = (obj: any, flag: boolean): DataTypeSet => {
-    const newObj: any = { ...obj };
-    for (const key in newObj) {
-      if (newObj.hasOwnProperty(key) && newObj[key] === !flag) {
-        newObj[key] = flag;
+  const setObjectFlag = (obj: DataTypeSet, flag: boolean): DataTypeSet => {
+    const newObj: DataTypeSet = { ...obj };
+    Object.keys(newObj).forEach((key) => {
+      if (key in newObj) {
+        newObj[key as keyof DataTypeSet] = flag;
       }
-    }
-    return newObj as DataTypeSet;
+    });
+    return newObj;
   };
 
   const getBrowsingHistory = () => {
-    chrome.history.search({
-      'text': '',
-      'startTime': startTime
-    },
-      function (results: chrome.history.HistoryItem[]) {
+    chrome.history.search(
+      {
+        text: '',
+        startTime: startTime,
+      },
+      (results: chrome.history.HistoryItem[]) => {
         setHistoryCount(results.length);
-        setBadgeCounter(prevCount => prevCount + results.length);
-      });
+        setBadgeCounter((prevCount) => prevCount + results.length);
+      },
+    );
   };
 
   const getCookie = () => {
-    chrome.cookies.getAll({},
-      function (cookies: chrome.cookies.Cookie[]) {
-        setCookieCount(cookies.length);
-        setBadgeCounter(prevCount => prevCount + cookies.length);
-      });
+    chrome.cookies.getAll({}, (cookies: chrome.cookies.Cookie[]) => {
+      setCookieCount(cookies.length);
+      setBadgeCounter((prevCount) => prevCount + cookies.length);
+    });
   };
 
   const getDownloadHistory = () => {
-    chrome.downloads.search({},
-      function (results: chrome.downloads.DownloadItem[]) {
-        setDownloadCount(results.length);
-        setBadgeCounter(prevCount => prevCount + results.length);
-      });
+    chrome.downloads.search({}, (results: chrome.downloads.DownloadItem[]) => {
+      setDownloadCount(results.length);
+      setBadgeCounter((prevCount) => prevCount + results.length);
+    });
   };
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
-    setCheckboxes(prevState => ({
+    setCheckboxes((prevState) => ({
       ...prevState,
       [value]: checked,
     }));
   };
 
   const handleCleanClick = () => {
-    const selectedCheckboxes = Object.keys(checkboxes).filter(key => checkboxes[key as keyof typeof checkboxes]);
+    const selectedCheckboxes = Object.keys(checkboxes).filter(
+      (key) => checkboxes[key as keyof typeof checkboxes],
+    );
 
     if (selectedCheckboxes.length > 0 && dataTypeSet) {
       let typesToClean: DataTypeSet = setObjectFlag(dataTypeSet, false);
 
-      selectedCheckboxes.forEach(checkboxValue => {
+      selectedCheckboxes.forEach((checkboxValue) => {
         switch (checkboxValue) {
-          case "bh":
+          case 'bh':
             typesToClean.history = true;
             break;
-          case "ca":
+          case 'ca':
             typesToClean.appcache = true;
             typesToClean.cache = true;
-            (typesToClean as any).cacheStorage = true;
+            typesToClean.cacheStorage = true;
             break;
-          case "co":
+          case 'co':
             cleanCookie();
             typesToClean.cookies = true;
             break;
-          case "dh":
+          case 'dh':
             typesToClean.downloads = true;
             break;
-          case "pd":
+          case 'pd':
             typesToClean.fileSystems = true;
             typesToClean.formData = true;
             typesToClean.indexedDB = true;
@@ -192,10 +206,9 @@ const CleanUpApp: React.FC = () => {
       });
 
       cleanByType(typesToClean);
-
     } else if (selectedCheckboxes.length === 0) {
       setShowAlert(true);
-      setMessage("Forgot to select?");
+      setMessage('Please select at least one option to clean');
     }
   };
 
@@ -213,34 +226,38 @@ const CleanUpApp: React.FC = () => {
   };
 
   return (
- <Container>
- <Typography variant="h4" gutterBottom>
+    <Container>
+      <Typography variant="h4" gutterBottom>
         Simple CleanUp
       </Typography>
- <FormControl component="fieldset">
- <FormGroup>
- <CheckboxList
-        checkboxes={checkboxes}
-        historyCount={historyCount}
-        cookieCount={cookieCount}
-        downloadCount={downloadCount}
-        handleCheckboxChange={handleCheckboxChange}
+      <FormControl component="fieldset">
+        <FormGroup>
+          <CheckboxList
+            checkboxes={checkboxes}
+            historyCount={historyCount}
+            cookieCount={cookieCount}
+            downloadCount={downloadCount}
+            handleCheckboxChange={handleCheckboxChange}
+          />
+          <Box mt={2}>
+            <Button
+              text="Clean"
+              onClick={handleCleanClick}
+              fullWidth
+              sx={{ mb: 1 }}
+            />
+          </Box>
+          <Box>
+            <Button text="Clean All" onClick={handleCleanAllClick} fullWidth />
+          </Box>
+        </FormGroup>
+      </FormControl>
+      <AlertMessage
+        message={message}
+        show={showAlert}
+        onClose={handleAlertClose}
       />
-      <Box mt={2}>
- </FormGroup>
- </FormControl>
-        <Button text="Clean" onClick={handleCleanClick} fullWidth sx={{ mb: 1 }} />
-      </Box>
-      <Box>
-        <Button text="Clean All" onClick={handleCleanAllClick} fullWidth />
-      </Box>
-      <br />
- <AlertMessage
- message={message}
- show={showAlert}
- onClose={handleAlertClose}
- />
- </Container>
+    </Container>
   );
 };
 

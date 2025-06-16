@@ -1,10 +1,6 @@
 import React from 'react';
-import CleanUpApp from '../src/components/CleanUpApp';
+import CleanUpApp from './components/CleanUpApp';
 
-const App: React.FC = () => {
-  return (
-    <CleanUpApp />
-  );
-};
+const App: React.FC = () => <CleanUpApp />;
 
 export default App;

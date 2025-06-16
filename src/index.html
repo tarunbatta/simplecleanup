@@ -4,63 +4,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Simple CleanUp</title>
-
-        <!-- build:css index.min.css -->
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="index.css" />
-        <!-- /build -->
-
-        <!-- build:js index.min.js -->
-        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="index.js"></script>
-        <!-- /build -->
+        
     </head>
     <body>
-        <div class="container">
-            <h4 class="page-header">Simple CleanUp</h4>
-            <form>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="bh" />
-                        Browsing History <span id="lblBh" class="badge">0</span>
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="ca" />
-                        Cache
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="co" />
-                        Cookie <span id="lblCo" class="badge">0</span>
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="dh" />
-                        Download History <span id="lblDh" class="badge">0</span>
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="pd" />
-                        Privacy Data
-                    </label>
-                </div>
-            </form>
-            <button id="btnClean" type="button" class="btn btn-primary btn-lg btn-block">Clean</button>
-            <button id="btnCleanAll" type="button" class="btn btn-danger btn-lg btn-block">Clean All</button> 
-            <br/>
-            <div id="dvAlert">
-                <div class="alert alert-warning alert-dismissible" role="alert">
-                    <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <div id="lblMessage"></div>
-                </div>  
-            </div>
-        </div>
+        <div id="root"></div>
+
+        <script type="module" src="/src/index.tsx"></script>
+
         <footer class="footer">
             <div class="container">
                 <p class="text-muted">Powered By: <a href="http://techbytarun.com/" target="_blank">Tarun Batta</a></p>

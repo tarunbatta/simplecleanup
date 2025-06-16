@@ -1,8 +1,9 @@
 #################
 ## Custom
 #################
-bower_components/
 node_modules/
+dist/
+package/
 
 #################
 ## Eclipse

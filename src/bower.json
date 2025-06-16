@@ -1,0 +1,21 @@
+{
+  "name": "simplecleanup",
+  "description": "This extension provides various features to clean your brower data.",
+  "main": "index.js",
+  "authors": [
+    "Tarun Batta"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+
+  "name": "Simple CleanUp",
+  "description": "This extension provides various features to clean your brower data.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "index.html",
+    "default_title": "Simple CleanUp"
+  },
+
+  "icons": { 
+    "16": "icon.png",
+    "48": "icon.png",
+    "64": "icon.png",
+    "128": "icon.png" 
+  },
+
+  "permissions": [
+    "activeTab"
+    , "browsingData"
+    , "clipboardRead"
+    , "clipboardWrite"
+    , "cookies"
+    , "downloads"
+    , "history"
+    , "notifications" 
+    , "storage" 
+    , "tabs"
+    , "webNavigation"
+    , "*://*/*"
+    , "https://ajax.googleapis.com/"
+  ]
+}

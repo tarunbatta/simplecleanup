@@ -14,53 +14,25 @@ Simple Cleanup is a Chrome extension designed to provide users with a quick and 
 
 ## Permission Justifications
 
-### activeTab
-
-Required to access the current tab for cleanup operations.
-
 ### BrowseData
 
-Required to remove browsing data like history, cache, and cookies.
-
-### clipboardRead
-
-Required to read clipboard data for cleanup operations.
-
-### clipboardWrite
-
-Required to write to clipboard for data export functionality.
+The BrowseData permission is fundamental to Simple Cleanup's core functionality. It allows the extension to access and clear specific types of Browse data, such as app cache, cache, cookies, downloads, file systems, history, indexedDB, localStorage, plugin data, service workers, and webSQL. This permission is essential for enabling users to selectively or fully clear their Browse data as advertised.
 
 ### cookies
 
-Required to access and remove cookies from websites.
+The cookies permission is necessary for Simple Cleanup to specifically target and clear browser cookies as part of its data cleaning functionality. While BrowseData can clear cookies, explicitly requesting cookies might be needed if you offer more granular cookie management outside the standard BrowseData API (e.g., listing specific cookies before deleting). If you only use BrowseData to clear cookies, you might not need this separate permission. Only include it if your extension uses the chrome.cookies API directly.
 
 ### downloads
 
-Required to access and clear download history.
+The downloads permission is required to allow Simple Cleanup to clear the user's download history and/or remove downloaded files (if your extension offers that specific functionality). This is part of the comprehensive data cleanup options provided by the extension.
 
 ### history
 
-Required to access and clear browsing history.
-
-### notifications
-
-Required to show cleanup completion notifications.
+The history permission is essential for Simple Cleanup to access and clear the user's Browse history, a core feature of its data cleanup capabilities. This allows users to remove records of visited webpages.
 
 ### storage
 
-Required to store user preferences and settings.
-
-### tabs
-
-Required to access tab information for cleanup operations.
-
-### webNavigation
-
-Required to monitor navigation events for cleanup triggers.
-
-### Host Permission
-
-Required to access website data for cleanup operations.
+The storage permission is required to persist user preferences and settings within Simple Cleanup (e.g., which data types to clear by default, custom cleanup schedules if applicable). This allows the extension to remember the user's choices across browser sessions.
 
 ## Data Usage
 

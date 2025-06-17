@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "package": "npm run build && zip -r simplecleanup.zip dist/"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",

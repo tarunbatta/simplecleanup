@@ -3,7 +3,7 @@
 
   "name": "Simple CleanUp",
   "description": "A simple Chrome extension to quickly clean your browsing data.",
-  "version": "1.0",
+  "version": "2.0.0",
 
   "action": {
     "default_icon": "icon.png",
@@ -14,14 +14,8 @@
     "16": "icon.png",
     "48": "icon.png",
     "64": "icon.png",
-    "128": "icon.png" 
+    "128": "icon.png"
   },
 
-  "permissions": [
-    "browsingData",
-    "cookies",
-    "downloads",
-    "history",
-    "storage"
-  ]
+  "permissions": ["browsingData", "cookies", "downloads", "history", "storage"]
 }

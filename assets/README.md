@@ -4,7 +4,7 @@ This directory contains all the visual assets needed for publishing the extensio
 
 ## Directory Structure
 
-```
+```text
 assets/
 ├── icons/           # Extension icons in various sizes
 ├── screenshots/     # Screenshots for Chrome Web Store
@@ -53,7 +53,8 @@ Optional promotional images for the Chrome Web Store:
 ## Usage
 
 These assets are used in:
+
 - Chrome Web Store listing
 - Extension manifest
 - Documentation
-- Marketing materials 
+- Marketing materials

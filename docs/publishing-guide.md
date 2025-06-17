@@ -1,19 +1,23 @@
 # Publishing Guide for Chrome Web Store
 
 ## Prerequisites
+
 1. Google Developer Account ($5 one-time fee)
 2. Extension package ready for upload
 3. Screenshots and promotional images
 4. Privacy policy (if required)
 
 ## Build for Production
+
 ```bash
 npm run build
 ```
 
 ## Package Structure
+
 The built extension will be in the `dist/` folder with the following structure:
-```
+
+```text
 dist/
 ├── manifest.json
 ├── index.html
@@ -25,11 +29,13 @@ dist/
 ## Required Assets
 
 ### Screenshots (Required)
+
 - **Small**: 1280x800 or 640x400
 - **Large**: 1280x800
 - **Promotional**: 1400x560 (optional but recommended)
 
 ### Icons
+
 - **16x16**: Toolbar icon
 - **32x32**: Windows computers
 - **48x48**: Display in extension management page
@@ -38,7 +44,7 @@ dist/
 ## Upload Process
 
 1. **Go to Chrome Web Store Developer Dashboard**
-   - Visit: https://chrome.google.com/webstore/devconsole/
+   - Visit: <https://chrome.google.com/webstore/devconsole/>
    - Sign in with your Google account
 
 2. **Add New Item**
@@ -70,15 +76,18 @@ dist/
 ## Common Issues
 
 ### Permission Denied
+
 - Ensure all permissions are justified in the listing
 - Provide clear explanations for each permission
 
 ### Rejected for Privacy
+
 - Ensure privacy policy is clear
 - Confirm no data collection
 - Emphasize local-only operation
 
 ### Screenshot Requirements
+
 - Screenshots must be actual extension screenshots
 - No mockups or designs
 - Must show real functionality
@@ -97,4 +106,5 @@ For issues with the Chrome Web Store:
 
 - Check the [Developer Documentation](https://developer.chrome.com/docs/webstore/)
 - Review [Policies](https://developer.chrome.com/docs/webstore/program_policies/)
-- Contact [Developer Support](https://support.google.com/chrome_webstore/) 
+- Contact [Developer Support](<https://support.google.com/chrome_webstore/>)
+- 

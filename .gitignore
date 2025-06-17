@@ -6,6 +6,13 @@ dist/
 package/
 
 #################
+## IDE & Environment
+#################
+.vscode/
+.idx/
+.DS_Store
+
+#################
 ## Eclipse
 #################
 

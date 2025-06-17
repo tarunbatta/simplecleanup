@@ -112,7 +112,17 @@ const CleanUpApp: React.FC = () => {
           />
           <Box mt={3} display="flex" flexDirection="column" gap={2}>
             <Button text="Clean" onClick={handleCleanClick} fullWidth />
-            <Button text="Clean All" onClick={handleCleanAllClick} fullWidth />
+            <Button
+              text="Clean All"
+              onClick={handleCleanAllClick}
+              fullWidth
+              sx={{
+                backgroundColor: 'error.main',
+                '&:hover': {
+                  backgroundColor: 'error.dark',
+                },
+              }}
+            />
           </Box>
         </FormGroup>
       </FormControl>

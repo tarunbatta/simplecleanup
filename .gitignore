@@ -7,6 +7,13 @@ package/
 simplecleanup.zip
 
 #################
+## Chrome Extension Build Files
+#################
+*.crx
+*.pem
+*.zip
+
+#################
 ## IDE & Environment
 #################
 .vscode/

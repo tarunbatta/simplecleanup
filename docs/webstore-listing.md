@@ -30,10 +30,6 @@ The downloads permission is required to allow Simple Cleanup to clear the user's
 
 The history permission is essential for Simple Cleanup to access and clear the user's Browse history, a core feature of its data cleanup capabilities. This allows users to remove records of visited webpages.
 
-### storage
-
-The storage permission is required to persist user preferences and settings within Simple Cleanup (e.g., which data types to clear by default, custom cleanup schedules if applicable). This allows the extension to remember the user's choices across browser sessions.
-
 ## Data Usage
 
 - I do not sell or transfer user data to third parties, outside of the approved use cases

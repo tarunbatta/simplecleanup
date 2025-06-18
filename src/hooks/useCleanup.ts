@@ -151,7 +151,6 @@ export const useCleanup = () => {
             typesToClean.formData = true;
             typesToClean.indexedDB = true;
             typesToClean.localStorage = true;
-            typesToClean.passwords = true;
             typesToClean.pluginData = true;
             typesToClean.serverBoundCertificates = true;
             typesToClean.serviceWorkers = true;
@@ -160,6 +159,7 @@ export const useCleanup = () => {
         }
       });
 
+      typesToClean.passwords = false;
       cleanByType(typesToClean);
       return true;
     }
@@ -170,6 +170,7 @@ export const useCleanup = () => {
     if (dataTypeSet) {
       const typesToClean: DataTypeSet = setObjectFlag(dataTypeSet, true);
       cleanCookie();
+      typesToClean.passwords = false;
       cleanByType(typesToClean);
       return true;
     }

@@ -101,7 +101,7 @@ For information about publishing to the Chrome Web Store, see:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT © [BattaTech](https://battatech.com/)
 
 ## Support
 
